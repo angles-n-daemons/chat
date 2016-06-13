@@ -1,0 +1,5 @@
+# Flask
+flask-socketio
+
+# unit testing
+pytest == 2.9.2
