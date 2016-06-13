@@ -14,9 +14,9 @@ class Config:
         if not cfg_id:
             raise Exception("No configuration item id given.")
 
-        query = "SELECT val FROM Configuration WHERE id = '%s'" % cfg_id
-        c = self.conn.cursor(query)
-        c.execute()
+        query = "SELECT val FROM Config WHERE id = '%s'" % cfg_id
+        c = self.conn.cursor()
+        c.execute(query)
 
         row = c.fetchone()
         if not row:
