@@ -3,3 +3,10 @@ flask-socketio
 
 # unit testing
 pytest == 2.9.2
+
+# gevent for web socket support
+gevent == 1.1.1
+gevent-websocket == 0.9.5
+
+# mysql
+mysql == 0.0.1
