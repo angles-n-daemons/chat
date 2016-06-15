@@ -10,21 +10,29 @@ app.debug = (__name__ == '__main__')
 app.config['SECRET'] = cfg.get('socket-key')
 socketio = SocketIO(app)
 
-@app.route('/')
-def index():
+@app.route('/', methods=['GET'])
+def route_index():
     return render_template('index.html')
 
-@app.route('/chat')
-def index():
+@app.route('/chat', methods=['GET'])
+def route_chat():
     return render_template('chat.html')
 
-@app.route('/api/login')
-def login():
-    # todo authenticate
+
+
+@app.route('/api/login', methods=['POST'])
+def api_login():
+	print request.form
+
+@app.route('/api/signup', methods=['POST'])
+def api_signup():
+	print request.form
+
+
 
 @socketio.on('test')
 def sock_test(obj):
-    print obj
+	pass
 
 @socketio.on('create_room')
 def create_room(data):

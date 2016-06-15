@@ -1,9 +1,50 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<p>Chat Application</p>
-	</body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="static/lib/jquery-popup/jquery.popupoverlay.js"></script>
+    <script src="/static/js/index.js"></script>
+  </head>
+  <body>
+    <div class="index-content">
+      <div class="welcome-msg">
+        <p class="font-bold">Welcome to Dillsapp!</p>
+      </div>
+      <button id="login-btn" class="btn btn-success">Login</button>
+      <button id="signup-btn" class="btn btn-success">Signup</button>
+    </div>
+
+    <div id="login-form">
+      <form name="loginForm">
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input type="text" class="form-control" name="login" placeholder="Login">
+        </div>
+        <div class="form-group">
+          <label for="pw">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-info">Login</button>
+        <button id="close-btn" class="btn btn-default">Back</button>
+      </form>
+    </div>
+    <div id="signup-form">
+      <form name="signupForm">
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input type="text" class="form-control" name="login" placeholder="Login">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-info">Register</button>
+        <button id="close-btn" class="btn btn-default">Back</button>
+      </form>
+    </div>
+  </body>
 </html>
