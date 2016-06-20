@@ -32,7 +32,7 @@ function submitForm(form, type) {
   $.ajax({
     url: 'api/' + type,
     type: 'POST',
-    
+    data: $(form).serialize()
   }).success(function(){
 
   }).fail(function(){

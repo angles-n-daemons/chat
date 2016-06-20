@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 
 from lib.config import Config
@@ -22,17 +22,16 @@ def route_chat():
 
 @app.route('/api/login', methods=['POST'])
 def api_login():
-	print request.form
+  print request.form.get('login')
 
 @app.route('/api/signup', methods=['POST'])
 def api_signup():
-	print request.form
-
+    pass
 
 
 @socketio.on('test')
 def sock_test(obj):
-	pass
+    pass
 
 @socketio.on('create_room')
 def create_room(data):
