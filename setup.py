@@ -2,7 +2,7 @@
 import json
 import sys
 import os
-import _mysql
+import MySQLdb
 from lib.config import Config
 
 class Setup:
@@ -65,7 +65,7 @@ class Setup:
             fields = { f: self.collect_field(f) for f in fieldNames }
 
             try:
-                db = _mysql.connect(host=fields['host'], port=int(fields['port']),
+                db = MySQLdb.connect(host=fields['host'], port=int(fields['port']),
                     user=fields['user'], passwd=fields['password'], db=fields['database'])
                 break
             except Exception as e:
@@ -78,8 +78,9 @@ class Setup:
 
         deploy_script = open('db/deployment.sql', 'r').read()
         deploy_queries = deploy_script.split(';')
+        c = db.cursor()
         for query in filter(None, deploy_queries):
-            db.query(query)
+            c.execute(query)
         db.commit()
 
         self.config.set('mysql-config', json.dumps(fields))

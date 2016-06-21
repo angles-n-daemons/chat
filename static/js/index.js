@@ -33,8 +33,8 @@ function submitForm(form, type) {
     url: 'api/' + type,
     type: 'POST',
     data: $(form).serialize()
-  }).success(function(){
-
+  }).success(function(res){
+    console.log(res);
   }).fail(function(){
 
   });
