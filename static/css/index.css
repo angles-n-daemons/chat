@@ -30,3 +30,9 @@ body {
 .popup_visible {
   transform: scale(1);
 }
+
+.signup-error, .login-error {
+  padding-top: 10px;
+  font-size: 16px;
+  color: #ffff1a;
+}

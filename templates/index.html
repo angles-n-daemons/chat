@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Dillsapp</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="static/lib/jquery-popup/jquery.popupoverlay.js"></script>
+    <script src="static/lib/js-cookie/js-cookie.js"></script>
     <script src="/static/js/index.js"></script>
   </head>
   <body>
@@ -30,6 +32,7 @@
         </div>
         <button type="submit" class="btn btn-info">Login</button>
         <button id="close-btn" class="btn btn-default">Back</button>
+        <div class="login-error"></div>
       </form>
     </div>
     <div id="signup-form">
@@ -44,6 +47,7 @@
         </div>
         <button type="submit" class="btn btn-info">Register</button>
         <button id="close-btn" class="btn btn-default">Back</button>
+        <div class="signup-error"></div>
       </form>
     </div>
   </body>

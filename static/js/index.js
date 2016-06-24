@@ -28,14 +28,24 @@ function setupPopups() {
 }
 
 function submitForm(form, type) {
-
+  if ( !$(form.password).val() || !$(form.login).val() ) {
+    $('.' + type + '-error').text('The Form is incomplete');
+    return;
+  }
   $.ajax({
     url: 'api/' + type,
     type: 'POST',
     data: $(form).serialize()
   }).success(function(res){
-    console.log(res);
-  }).fail(function(){
-
+    if (res.error) {
+      $('.' + type + '-error').text(res.error);
+    }
+    else {
+      var user_id = res.user_id;
+      Cookies.set('user_id', user_id);
+      location = '/app'
+    }
+  }).fail(function(err){
+    $('.' + type + '-error').text('Incorrect Credentials');
   });
 };

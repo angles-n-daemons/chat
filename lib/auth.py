@@ -4,7 +4,9 @@ import MySQLdb
 import uuid
 import traceback
 from binascii import hexlify
-from json import loads
+from json import loads, dumps
+from flask import current_app
+from model.user import User
 
 class Auth:
     def __init__(self, config):
@@ -18,49 +20,43 @@ class Auth:
         if not password:
             return None
 
-        iterations = self.config.get('pw-hashing-iter')
-        salt = hexlify(os.urandom(16))
-        dk = hashlib.pbkdf2_hmac('sha256', password, salt, int(iterations))
+        u = User(self.config, login=login)
+        if u.uid:
+            return dumps({'error': 'User with username already exists.'})
 
-        user_id = str(uuid.uuid4())
-        sql = """INSERT INTO User (uid, login, hash, salt, iterations)
-                 VALUES (%s, %s, %s, %s, %s)"""
-        params = (user_id, login, hexlify(dk), salt, iterations)
+        u.create(login)
+        u.login = login
 
-        db = self.get_connection()
-        c = db.cursor()
-        c.execute(sql, params)
-        
-        db.commit()
+        try:
+            u.iterations = self.config.get('pw-hashing-iter')
+            u.salt = hexlify(os.urandom(16))
 
-        return {'user_id': user_id}
+            dk = hashlib.pbkdf2_hmac('sha256', password, u.salt, int(u.iterations))
+            u.hash_val = hexlify(dk)
+
+            u.save()
+
+            return {'user_id': u.uid}
+        except:
+            current_app.logger.error(traceback.format_exc())
+            return None
 
 
     def login(self, login, password):
         """ Attempt to authenticate to dillsapp's directory. """
 
-        sql = """ SELECT uid, hash, salt, iterations FROM User WHERE login = %s """
-        params = (login,)
-
-        db = self.get_connection()
-        c = db.cursor()
-        c.execute(sql, params)
+        u = User(self.config, login=login)
+        if not u.uid:
+            return dumps({'error': 'No user with login exists.'})
 
         try:
-            (user_id, hash_hex, salt, iterations) = c.fetchone()
-            dk = hashlib.pbkdf2_hmac('sha256', password, salt, int(iterations))
-
-            if hexlify(dk) == hash_hex:
-                return {'user_id': user_id}
+            (hash_val, salt, iterations) = u.get_credentials()
+            dk = hashlib.pbkdf2_hmac('sha256', password, u.salt, int(iterations))
+            
+            if hash_val == hexlify(dk):
+                return {'user_id': u.uid}
             else:
                 return None
         except:
-            traceback.print_exc()
+            current_app.logger.error(traceback.format_exc())
             return None
-
-
-    def get_connection(self):
-        """ Returns a db connection for use. """
-        fields = loads(self.config.get('mysql-config'))
-        return MySQLdb.connect(host=fields['host'], port=int(fields['port']),
-                    user=fields['user'], passwd=fields['password'], db=fields['database'])
