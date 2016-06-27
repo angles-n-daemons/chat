@@ -1,0 +1,36 @@
+.room-display-container {
+    position: relative;
+    height: 25%;
+    border: 2px solid #1a003a;
+    background-color: #1a001a;
+}
+.room-display-title {
+    padding-left: 8px;
+    font-style: italic;
+    font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffd633;
+    height: 20%;
+}
+.room-names {
+    position: relative;
+    height: 75%;
+    border: 2px solid #2e2e9b;
+    background-color: #1e1e7b
+}
+
+#create-room-btn {
+    float: right;
+    margin: 5px;
+}
+
+#room-form label {
+    color: #49F2CB;
+}
+#room-form {
+    transform: scale(0.8);
+}
+.popup_visible #room-form {
+    transform: scale(1);
+}

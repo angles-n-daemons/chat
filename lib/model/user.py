@@ -1,6 +1,6 @@
 import MySQLdb
 import uuid
-from json import loads, dumps
+from json import loads
 
 class User:
     def __init__(self, config, uid=None, login=None):

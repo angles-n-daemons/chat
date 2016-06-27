@@ -1,0 +1,22 @@
+<div class="room-display-container">
+    <div class="room-names">
+        <div class="room-display-title">Open Rooms</div>
+        <span ng-repeat="room in rooms">
+            <div ng-bind="room.name" ng-click="enterRoom(room)"></div>
+        </span>
+    </div>
+    <div>
+        <button id="create-room-btn" class="btn btn-info" align="right">Create Room</button>
+    </div>
+    <div id="room-form">
+      <form name="roomForm">
+        <div class="form-group">
+          <label for="login">Room Name</label>
+          <input type="text" class="form-control" class="new-room-name" placeholder="Room Name">
+        </div>
+        <button type="submit" class="btn btn-info" ng-click="createRoom()">Save</button>
+        <button id="close-btn" class="btn btn-default">Back</button>
+        <div class="form-error room-error" ng-bind="newRoomError"></div>
+      </form>
+    </div>
+</div>

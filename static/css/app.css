@@ -1,0 +1,28 @@
+html {
+    background-color: black;
+}
+
+.left-panel {
+    position: absolute;
+    float: left;
+    width: 65%;
+    min-width: 600px;
+    height: 100%;
+    min-height: 500px;
+    border: 3px black solid;
+    background-color: #000033;
+}
+.right-panel {
+    float: right;
+    width: 35%;
+    min-width: 330px;
+    height: 100%;
+    min-height: 500px;
+    border: 3px green #000053;
+    background-color: #191967;
+}
+
+.form-error {
+  padding-top: 10px;
+  color: #ffff1a;
+}

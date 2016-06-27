@@ -4,6 +4,7 @@ from json import dumps
 
 from lib.config import Config
 from lib.auth import Auth
+from lib.model.room import Room
 
 app = Flask(__name__)
 cfg = Config('config.db')
@@ -52,9 +53,19 @@ def api_signup():
     else:
         abort(401)
 
-@socketio.on('showrooms')
-def show_rooms(data):
-    
+@app.route('/api/room/<action>', methods=['GET'])
+def api_room(action):
+    if action == 'list':
+        r = Room(config)
+        return dumps(r.list())
+
+@socketio.on('create_room')
+def create_room(data):
+    roomName = data['name']
+    r = Room(config, roomName)
+    r.create()
+    emit('new_room', {'roomId': r.rid, 'name': r.name, 'color': r.color})
+
 
 @socketio.on('join')
 def on_join(data):
@@ -72,10 +83,11 @@ def on_leave(data):
 
 @socketio.on('message')
 def on_message(data):
-
+    pass
 
 @socketio.on('test')
 def sock_test(obj):
+    print obj
     pass
 
 if __name__ == '__main__':

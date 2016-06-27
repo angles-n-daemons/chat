@@ -43,6 +43,7 @@ function submitForm(form, type) {
     else {
       var user_id = res.user_id;
       Cookies.set('user_id', user_id);
+      Cookies.set('username', $(form.login).val());
       location = '/app'
     }
   }).fail(function(err){
