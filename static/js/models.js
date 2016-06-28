@@ -12,40 +12,30 @@ function Room(row) {
     this.messages = [];
 }
 
-Room.prototype.loadMessages = function() {
+Room.prototype.loadMessages = function(cb) {
     var me = this;
     if (!me.id) {
         throw 'Cannot load for room without id.';
     }
-
     var args = {
-        'rid': me.id,
+        'roomId': me.id,
         'offset': me.offset
     };
 
     $.ajax({
-        url: '/api/message/list/',
+        url: '/api/message/list/' + me.id,
         type: 'GET',
-        data: args,
         dataType: 'json',
         contentType: 'application/json'
     }).success(function(res) {
         var messages = res.messages;
         me.offset = me.offset + messages.length;
         me.messages = me.messages.concat(messages);
+
+        if (cb) {
+            cb();
+        }
     }).fail(function(err) {
         console.log(err);
     });
-};
-
-function Message(roomId) {
-
-};
-
-Message.prototype.post = function() {
-
-};
-
-function User(login) {
-    this.isMe = false;
 };

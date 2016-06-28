@@ -50,6 +50,29 @@ class Room:
         return {'rooms': rooms}
 
 
+    def getMessages(self, room_id):
+        """ Gets messages for a given room. """
+
+
+        def row_to_message(row):
+            return {'messageId': row[0], 'roomId': row[1], 'userId': row[2], 'login': row[3], 'content': row[4]}
+
+        sql = """ SELECT mid, rid, uid, login, content from Message WHERE rid = %s ORDER BY sent_when ASC """
+        params = (room_id,)
+
+        db = self.get_connection()
+
+        c = db.cursor()
+        c.execute(sql, params)
+
+        rows = c.fetchall()
+        c.close()
+        db.close()
+
+        messages = map(row_to_message, rows)
+
+        return {'messages': messages}
+
     def get_connection(self):
         """ Returns a db connection for use. """
         fields = loads(self.config.get('mysql-config'))

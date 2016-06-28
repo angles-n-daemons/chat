@@ -1,11 +1,16 @@
 <div class="chat-container">
-    <div class="rooms-bar">
-        
+    <div class="chat-title">
+        {{ currentRoom ? 'Chatting in: ' + currentRoom.name : 'Select Room' }}
     </div>
     <div class="messages">
-        
+        <div ng-repeat="message in currentRoom.messages"
+             class="message"
+             ng-class="{ 'from-me': message.userId === userId }">
+             <div style="padding:5px;font-size:8px" ng-bind="message.login"></div>
+             <div ng-bind="message.content"></div>
+        </div>
     </div>
-    <div class="massage-input">
-        
+    <div class="message-input">
+        <input type="text" id="message-field" ng-model="userMessage"/><button class="btn btn-warning" ng-click="sendMessage()">Send</button>
     </div>
 </div>

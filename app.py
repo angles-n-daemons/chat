@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, make_response, abort, current_app
-from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from json import dumps
 
 from lib.config import Config
 from lib.auth import Auth
 from lib.model.room import Room
+from lib.model.message import Message
 
 app = Flask(__name__)
 cfg = Config('config.db')
@@ -59,6 +60,12 @@ def api_room(action):
         r = Room(config)
         return dumps(r.list())
 
+@app.route('/api/message/<action>/<room_id>', methods=['GET'])
+def api_message(action, room_id):
+    if action == 'list':
+        r = Room(config)
+        return dumps(r.getMessages(room_id))
+
 @socketio.on('create_room')
 def create_room(data):
     roomName = data['name']
@@ -69,21 +76,18 @@ def create_room(data):
 
 @socketio.on('join')
 def on_join(data):
-    login = data['login']
     room = data['room']
     join_room(room)
-    send(username + ' has entered the room.', room=room)
 
 @socketio.on('leave')
 def on_leave(data):
-    login = data['login']
     room = data['roomId']
     leave_room(room)
-    send(username + ' has left the room.', room=room)
 
-@socketio.on('message')
+@socketio.on('send_message')
 def on_message(data):
-    pass
+    Message.create(config, data)
+    emit('new_message', data, room=data['roomId'])
 
 @socketio.on('test')
 def sock_test(obj):

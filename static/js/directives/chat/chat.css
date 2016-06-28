@@ -1,0 +1,41 @@
+.chat-title {
+    padding: 15px;
+    font-style: italic;
+    font: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffd633;
+    height: 10%;
+    background: -webkit-radial-gradient(#007399, #000033);
+}
+
+.messages {
+    height: 60vh;
+    overflow: scroll;
+}
+.message {
+    width: 60%;
+    display: block;
+    float: left;
+    margin: 8px;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 4px;
+    background-color: #33ccff;
+}
+.message.from-me {
+    float: right;
+    text-align: right;
+    background-color: #00ffcc;
+}
+
+.message-input {
+    height: 10%;
+    background-color: -webkit-radial-gradient(#ffffcc, #ffffcc, #000033);;
+}
+.message-input input {
+    width: 85%;
+}
+.message-input button {
+    margin-left: 5%;
+}

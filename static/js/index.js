@@ -35,7 +35,8 @@ function submitForm(form, type) {
   $.ajax({
     url: 'api/' + type,
     type: 'POST',
-    data: $(form).serialize()
+    data: $(form).serialize(),
+    dataType: 'json'
   }).success(function(res){
     if (res.error) {
       $('.' + type + '-error').text(res.error);
