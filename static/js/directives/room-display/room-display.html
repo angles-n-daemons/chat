@@ -1,9 +1,9 @@
 <div class="room-display-container">
     <div class="room-names">
         <div class="room-display-title">Open Rooms</div>
-        <span ng-repeat="room in rooms">
-            <div ng-bind="room.name" ng-click="enterRoom(room)"></div>
-        </span>
+        <div class="room-options">
+            <div ng-bind="room.name" ng-repeat="room in rooms" ng-click="joinRoom(room)"></div>
+        </div>
     </div>
     <div>
         <button id="create-room-btn" class="btn btn-info" align="right">Create Room</button>

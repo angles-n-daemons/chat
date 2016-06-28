@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module("dillsapp").directive("dillsappRoomDisplay", function() {
+angular.module("dillsapp").directive("dillsappRoomDisplay", ['$rootScope', function($rootScope) {
   return {
     restrict: 'EA',
     scope: true,
@@ -37,6 +37,7 @@ angular.module("dillsapp").directive("dillsappRoomDisplay", function() {
             for (var i in res.rooms) {
               scope.addRoom(res.rooms[i]);
             }
+            scope.$apply();
           },
           error: function(err) {
             console.log(err);
@@ -66,14 +67,19 @@ angular.module("dillsapp").directive("dillsappRoomDisplay", function() {
           $('.room-error').text(err);
         }
       };
+
+      scope.joinRoom = function(room) {
+        $rootScope.$broadcast('join_room', room);
+      };
       
       // socket calls
 
       socket.on('new_room', function(data) {
         scope.addRoom(data);
+        scope.$apply();
       });
 
       scope.init(); 
     }
   };
-});
+}]);

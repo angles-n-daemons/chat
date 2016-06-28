@@ -10,15 +10,4 @@ app.controller("dillsappApplication", function($scope) {
 
     $scope.roomsById = {};
     $scope.rooms = [];
-
-
-    $scope.loadRooms = function() {
-        var offset = $scope.rooms.length;
-        $.ajax({
-            url: 'api/room/list/' + offset,
-            type: 'GET',
-        }).success(function(res){
-        }).fail(function(err) {
-        });
-    };
 });

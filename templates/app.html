@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/static/css/app.css">
         <link rel="stylesheet" type="text/css" href="/static/js/directives/room-display/room-display.css">
+        <link rel="stylesheet" type="text/css" href="/static/js/directives/chat/chat.css">
 
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -16,11 +17,12 @@
 		<script src="/static/js/app.js"></script>
         <script src="/static/js/models.js"></script>
         <script src="/static/js/directives/room-display/room-display.js"></script>
+        <script src="/static/js/directives/chat/chat.js"></script>
 	</head>
 	<body ng-app="dillsapp" ng-controller="dillsappApplication">
         <div class="left-panel">
             <dillsapp-room-display></dillsapp-room-display>
-            <div><!-- Chat window, shows messages and allows users to send. --></div>
+            <dillsapp-chat></dillsapp-chat>
         </div>
         <div class="right-panel"><!-- floating bar on right with users display --></div>
 	</body>

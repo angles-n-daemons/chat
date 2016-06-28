@@ -5,9 +5,9 @@ function RoomContainer() {
     this.rooms = [];
 }
 
-function Room(id, name) {
-    this.id = id;
-    this.name = name;
+function Room(row) {
+    this.id = row['roomId'];
+    this.name = row['name'];
     this.isActive = false;
     this.messages = [];
 }
