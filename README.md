@@ -13,7 +13,7 @@ The first thing you are going to need to do is set up the previous dependencies.
 * Have sqlite3 ready to run in python.
 
 Now you need to setup the python dependencies. I recommend you use a virtualenvironment to do so as I specifify versions for my packages.
-`pip install -r requiremenets.txt`
+`pip install -r requirements.txt`
 
 I made the configuration file for this project a sqlite database that you need to setup. You can do so by running the 'setup.py' file from the command line.
 `python setup.py`
