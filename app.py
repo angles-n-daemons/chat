@@ -11,8 +11,10 @@ app = Flask(__name__)
 cfg = Config('config.db')
 
 app.debug = (__name__ == '__main__')
+
 app.config['SECRET'] = cfg.get('socket-key')
 socketio = SocketIO(app)
+socketio.server.eio.async_mode = 'gevent'
 
 config = Config('config.db')
 auth = Auth(config)
@@ -95,4 +97,4 @@ def sock_test(obj):
     pass
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, port=8000)

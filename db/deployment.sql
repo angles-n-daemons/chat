@@ -8,6 +8,7 @@ CREATE TABLE User (
   login VARCHAR(100) NOT NULL UNIQUE,
   hash CHAR(64) NOT NULL,
   salt CHAR(32) NOT NULL,
+  iterations INTEGER,
   PRIMARY KEY (uid)
 );
 

@@ -24,7 +24,7 @@ class User:
             raise Exception('User already exists.')
         
         user_id = str(uuid.uuid4())
-        sql = """INSERT INTO User (uid, login) VALUES (%s, %s)"""
+        sql = """INSERT INTO User (uid, login, hash, salt) VALUES (%s, %s, '', '')"""
         params = (user_id, login)
 
         db = self.get_connection()
